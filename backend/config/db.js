@@ -1,19 +1,19 @@
-//This is Temoorary Database Configuration
-
-// db.js
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config(); // Load environment variables
 
 const connectMongoDB = async () => {
   try {
-    await mongoose.connect("your_mongodb_connection_string", {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("Connected to MongoDB");
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
+    console.error(`Error connecting to MongoDB: ${error.message}`);
     process.exit(1); // Exit the process with failure
   }
 };
 
-export default connectMongoDB; // Export the function
+export default connectMongoDB;
