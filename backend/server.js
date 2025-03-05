@@ -9,6 +9,8 @@ import userRoutes from "./routes/user.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import notificationRoutes from "./routes/notification.routes.js";
 
+import cors from "cors";
+
 dotenv.config();
 
 cloudinary.config({
@@ -23,6 +25,13 @@ const PORT = process.env.PORT || 5041; //change the port number to 5041 for the 
 app.use(express.json()); //to parse req.body for post requests
 app.use(express.urlencoded({ extended: true })); //to parse form data(urlEncoded)
 
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Allow frontend domain
+    methods: "GET,POST,PUT,DELETE", // Allow HTTP methods
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
