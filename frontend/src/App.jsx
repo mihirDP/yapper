@@ -69,7 +69,7 @@ function App() {
         />
       </Routes>
       {authUser && <RightPanel />}
-      <Toaster />
+      <Toaster position="bottom-center" reverseOrder={false} />
     </div>
   );
 }
